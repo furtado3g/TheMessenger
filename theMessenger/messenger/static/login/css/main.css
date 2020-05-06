@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container.margin-ahead{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.card{
+    min-height: 75vmin;
+}
+.card > .row{
+    min-height: 75vmin;
+}
+.row>.col-md-6{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.bg-dark{
+    background-color: blueviolet !important;
+}
+.link{
+    color: white;
+}
+.link:hover{
+    color: whitesmoke;
+}
+.btn-primary{
+    color: blueviolet;
+    background-color: whitesmoke;
+    border-color: whitesmoke;
+}
+.btn-primary:hover{
+    color: white;
+    background-color: purple;
+    border-color: purple;
+}
