@@ -1,0 +1,4 @@
+##ignore files from 
+.venv/
+.env
+*.sqlite3
