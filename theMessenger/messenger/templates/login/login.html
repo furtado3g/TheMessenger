@@ -14,34 +14,37 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Email</label>
-                                        <input type="text" class="form-control" id="email">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Email</label>
+                                            <input type="text" class="form-control" id="email">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Senha</label>
-                                        <input type="password" class="form-control" id="password">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Senha</label>
+                                            <input type="password" class="form-control" id="password">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-right">
-                                    <a href="" class="link">
-                                        Esqueci Minha Senha
-                                    </a>
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <a href="" class="link">
+                                            Esqueci Minha Senha
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary">Entrar</button>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary">Entrar</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
