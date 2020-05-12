@@ -37,3 +37,17 @@ body{
     background-color: purple;
     border-color: purple;
 }
+.text-purple{
+    color: blueviolet;
+}
+
+.btn-purple{
+    color: blueviolet;
+    background-color:whitesmoke;
+    border-color: blueviolet;
+}
+.btn-purple:hover{
+    color: whitesmoke       ;
+    background-color:blueviolet;
+    border-color: blueviolet;
+}

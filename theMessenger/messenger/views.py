@@ -7,7 +7,7 @@ from django.contrib.auth import login as authLogin,authenticate,logout
 #   
 def loginHome(request):
     if request.method == "GET" :
-        return render(request,'login/login.html')
+        return render(request,'login/register.html')
     elif request.method == "POST":
         user = authenticate(username=request.POST['login'],password=request.POST['senha'])
         if user is not None :
@@ -16,7 +16,7 @@ def loginHome(request):
             context = {
                 "logado" : logado
             }
-            return render(request,'login/login.html',context)
+            return render(request,'login/register.html',context)
         else:
             logado  = True
             message = "Usuario ou Senha incorretos"
@@ -24,7 +24,7 @@ def loginHome(request):
                 "logado" : logado,
                 "message" : message
             }
-            return render(request,'login/login.html',context)
+            return render(request,'login/register.html',context)
 
 def logoutView (request):
     logout(request)

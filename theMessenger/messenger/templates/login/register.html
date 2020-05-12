@@ -1,0 +1,54 @@
+{% extends 'login/login.html' %}
+{% block registerForm %}
+<div class="row">
+    <div class="col-md-12 mx-2">
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-purple">
+                        Registrar
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="text-purple">Nome</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="text-purple">Sobrenome </label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="text-purple">Email</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="text-purple">Senha</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-purple">Registrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock registerForm %}
