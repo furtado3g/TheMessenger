@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from messenger.views import loginHome
+from messenger.views import loginHome, registerView, logoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',loginHome)
+    path('',loginHome),
+    path('register',registerView),
+    path('logout',logoutView)
 ]

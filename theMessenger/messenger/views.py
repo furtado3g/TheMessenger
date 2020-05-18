@@ -1,6 +1,17 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login as authLogin,authenticate,logout
+from .models import AuthUser
+from django.forms import ModelForm
+import json
+from .util import newUser as userForm
 # Create your views here.
+
+
+class UserForm(ModelForm):
+
+    class Meta:
+        model = AuthUser
+        fields = ['username','email','password','first_name','last_name']
 
 #
 #   Sistema de Logon e logoff
@@ -28,7 +39,21 @@ def loginHome(request):
 
 def logoutView (request):
     logout(request)
-    redirect('')
+    return render(request,'login/register.html')
 #
 # New user views
 # 
+def registerView(request):
+    user = userForm(data=request.POST)
+    convertedUser = UserForm(user)
+    if convertedUser.is_valid:
+        convertedUser.save()
+        return redirect('/')
+    else:
+        logado = False,
+        message = "Erro ao Tentar se Registrar Tente novamente mais tarde"
+        context = {
+            "logado" : logado,
+            "message" : message
+        }
+        return render(request,'login/register.html',context)
