@@ -20,7 +20,7 @@ def loginHome(request):
     if request.method == "GET" :
         return render(request,'login/register.html')
     elif request.method == "POST":
-        user = authenticate(username=request.POST['login'],password=request.POST['senha'])
+        user = authenticate(username=request.POST['username'],password=request.POST['password'])
         if user is not None :
             authLogin(request,user)
             logado = True
