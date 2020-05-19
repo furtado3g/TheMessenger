@@ -11,7 +11,7 @@ class UserForm(ModelForm):
 
     class Meta:
         model = AuthUser
-        fields = ['username','email','password','first_name','last_name']
+        fields = ['username','email','password','first_name','last_name','is_superuser','is_staff','is_active']
 
 #
 #   Sistema de Logon e logoff
@@ -44,9 +44,9 @@ def logoutView (request):
 # New user views
 # 
 def registerView(request):
-    user = userForm(data=request.POST)
+    user = userForm(data=request.POST).get_values()
     convertedUser = UserForm(user)
-    if convertedUser.is_valid:
+    if convertedUser.is_valid():
         convertedUser.save()
         return redirect('/')
     else:
