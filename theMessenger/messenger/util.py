@@ -23,9 +23,8 @@ class newUser:
         }
        
     def crypto(self,password):
-        return hashlib.pbkdf2_hmac(
-                'sha256', # The hash digest algorithm for HMAC
-                password.encode('utf-8'), # Convert the password to bytes
-                100000, # It is recommended to use at least 100,000 iterations of SHA-256 
-                dklen=128 # Get a 128 byte key
-            )
+        salt = 'homesweethole'
+        key  = hashlib.sha256(password.encode()).hexdigest()
+        print(key)
+        return key
+        
