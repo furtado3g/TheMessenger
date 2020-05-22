@@ -119,3 +119,7 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class FriendShip(models.Model):    
+    me = models.ForeignKey(AuthUser,on_delete=models.CASCADE)
+    friend = models.IntegerField()
+    date_include = models.DateTimeField(default=now())

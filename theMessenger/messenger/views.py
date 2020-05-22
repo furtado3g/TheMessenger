@@ -38,7 +38,7 @@ def loginHome(request):
 
 def logoutView (request):
     logout(request)
-    return render(request,'login/register.html')
+    return redirect('/')
 #
 # New user views
 # 
@@ -63,6 +63,12 @@ def registerView(request):
 @login_required(login_url='')
 def home(request):
     user = {
-        "user" : request.user
+        "user" : request.user,
+        "friends":[
+            {   
+                "name" : "Lucas Furtado",
+                "id" : "1"
+            }
+        ]
     }
-    return render(request,'messenger/template.html',user)
+    return render(request,'messenger/sidebar.html',user)
