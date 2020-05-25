@@ -2,35 +2,36 @@
 {% block bodyBlock %}
 <div class="container-fluid mt-2">
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 sidebar bg-purple mt-3">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
+                    <div class="form-group bg-purple m-auto">
                         <input type="text" class="form-control" id="friend" placeholder="Pesquisar">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3 border-bottom">
+                <div class="col margin-dark">
+                    <div class="h2">
+                        Amigos
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            Amigos
-                        </div>
-                        <div class="card-body">
-                            {% for friend in friends %}
-                                <div class="row">
-                                    <div class="col">
-                                        <p data-value="{{friend.id}}">{{ friend.name }}</p>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                {% for friend in friends %}
+                    <div class="row border-bottom">
+                        <div class="col">
+                            <h5 data-value="{{friend.id}}">{{ friend.name }}</h5>
                         </div>
                     </div>
+                {% endfor %}
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-
+            {% block chatContainer %}
+            {% endblock chatContainer %}
         </div>
     </div>
 </div>
