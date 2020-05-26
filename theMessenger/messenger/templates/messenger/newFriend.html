@@ -1,0 +1,11 @@
+<div class="row nav-link feather">
+    <div class="col">
+        {% for friend in friends %}
+        <div class="row nav-link" onclick="" data-user="{{friend.id}}">
+            <div class="col-md-12 py-2 h5" style="background:#fff;color:blueviolet;overflow:hidden"> 
+                {{ friend.username }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

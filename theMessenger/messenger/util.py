@@ -28,3 +28,15 @@ class newUser:
         print(key)
         return key
         
+
+class AddFriend:
+
+    def __init__(self,data):
+        self.user_id = data.me
+        self.friend_id = data.friend
+    
+    def getValues(self):
+        return {
+            "me":self.user_id,
+            "friend":self.friend_id
+        }

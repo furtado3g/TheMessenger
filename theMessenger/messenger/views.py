@@ -1,11 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login as authLogin,authenticate,logout
 from django.contrib.auth.models import User
-from .models import AuthUser
+from .models import AuthUser,Friendship
 from django.forms import ModelForm
 import json
-from .util import newUser as userForm
+from django.http import JsonResponse
+from .util import newUser as userForm,AddFriend
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 # Create your views here.
 
 
@@ -15,6 +18,10 @@ class UserForm(ModelForm):
         model = AuthUser
         fields = ['username','email','password','first_name','last_name','is_superuser','is_staff','is_active']
 
+class friendForm(ModelForm):
+    class Meta:
+        model = Friendship
+        fields = ['me','friend']
 #
 #   Sistema de Logon e logoff
 #   
@@ -72,3 +79,22 @@ def home(request):
         ]
     }
     return render(request,'messenger/sidebar.html',user)
+
+@csrf_exempt
+def findUsers(request):
+    requestValue = json.loads(request.body)
+    users = User.objects.all().filter(username__icontains=requestValue['fieldValue'])
+    friends = {
+        'friends' : users
+    }
+    return render(request,'messenger/newFriend.html',{'friends' : users})
+
+@login_required(login_url="")
+def addFriend(request):
+    relation = AddFriend({"me":request.user.id,"friend":request.POST.get("friend_id")})
+    friendship = friendForm(relation)
+    if friendship.is_valid():
+        friendship.save()
+        return JsonResponse({"message":"Amigo adicionado"})
+    else:
+        return JsonResponse({"message":"Erro ao Adicionar Amigo"})

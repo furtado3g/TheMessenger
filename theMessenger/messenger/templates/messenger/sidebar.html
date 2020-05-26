@@ -3,15 +3,16 @@
 <div class="container-fluid mt-2">
     <div class="row">
         <div class="col-3 sidebar bg-purple mt-3">
-            <div class="row">
+            <div class="row nav-link feather">
                 <div class="col-md-12">
                     <div class="form-group bg-purple m-auto">
-                        <input type="text" class="form-control" id="friend" placeholder="Pesquisar">
+                        <input type="text" class="form-control" id="friend" placeholder="Pesquisar" onkeyup="searchFriend(event)">
                     </div>
                 </div>
             </div>
+            <div id="new-friend"></div>
             <div class="row my-3 border-bottom">
-                <div class="col margin-dark">
+                <div class="col">
                     <div class="h2">
                         Amigos
                     </div>
@@ -20,8 +21,8 @@
             <div class="row">
                 <div class="col">
                 {% for friend in friends %}
-                    <div class="row border-bottom">
-                        <div class="col">
+                    <div class="row ">
+                        <div class="col text-center border-bottom">
                             <h5 data-value="{{friend.id}}">{{ friend.name }}</h5>
                         </div>
                     </div>

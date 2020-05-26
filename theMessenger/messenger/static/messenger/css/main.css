@@ -37,12 +37,14 @@
 
 .sidebar .nav-link {
   font-weight: 500;
-  color: #333;
+  color: #fff;
+  overflow:hidden;
 }
 
 .sidebar .nav-link .feather {
   margin-right: 4px;
   color: #999;
+  overflow:hidden;
 }
 
 .sidebar .nav-link.active {
@@ -64,12 +66,7 @@
     color: white;
 }
 
-#friend{
-  max-width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 5%;
-}
+
 
 .margin-dark{
   border-color: #333;
