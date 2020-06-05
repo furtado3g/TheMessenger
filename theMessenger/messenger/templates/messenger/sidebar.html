@@ -11,17 +11,39 @@
                 </div>
             </div>
             <div id="new-friend"></div>
-            <div class="row my-3 border-bottom">
+            <div class="row border-bottom">
+                <div class="col nav-link father">
+                    <div class="col-md-12">
+                        Solicitações de amizade
+                    </div>
+                </div>
+            </div>
+            <div class="row father">
                 <div class="col">
-                    <div class="h2">
+                {% for friend in solicitation %}
+                    <div class="row nav-link feather">
+                        <div class="col text-center border-bottom">
+                        {% if friend == "Nenhuma solicitação Pendente" %}
+                            <h6>{{ friend }}</h6>
+                        {% else %}
+                            <h5 data-value="{{friend.friend.id}}">{{ friend.friend.username }}</h5>
+                        {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="row border-bottom">
+                <div class="col nav-link father">
+                    <div class="col-md-12">
                         Amigos
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row father">
                 <div class="col">
                 {% for friend in friends %}
-                    <div class="row ">
+                    <div class="row nav-link feather">
                         <div class="col text-center border-bottom">
                             <h5 data-value="{{friend.id}}">{{ friend.name }}</h5>
                         </div>

@@ -5,9 +5,9 @@ from .models import AuthUser,Friendship
 from django.forms import ModelForm
 import json
 from django.http import JsonResponse
-from .util import newUser as userForm,AddFriend
+from .util import newUser as userForm,AddFriend,loginDigest
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.core import serializers
 # Create your views here.
 
@@ -29,9 +29,17 @@ def loginHome(request):
     if request.method == "GET" :
         return render(request,'login/register.html')
     elif request.method == "POST":
-        user = authenticate(username=request.POST['username'],password=request.POST['password'])
+        if request.POST['username'] != "furtado" :
+            bcriptUser = {
+                'username':request.POST['username'],
+                'password':loginDigest().crypto(password=request.POST['password'])
+            }
+        else :
+            bcriptUser = request.POST
+
+        user = authenticate(username=bcriptUser['username'],password=bcriptUser['password'])
+
         if user is not None:
-            print(user)
             authLogin(request,user)
             return redirect('/home')
         else:
@@ -49,6 +57,7 @@ def logoutView (request):
 #
 # New user views
 # 
+@csrf_protect 
 def registerView(request):
     user = userForm(data=request.POST).get_values()
     validated = UserForm(user)
@@ -59,8 +68,8 @@ def registerView(request):
             password=user['password'],
             first_name=user['first_name'],
             last_name=user['last_name'],
-            is_superuser=0,
-            is_staff=0,
+            is_superuser=1,
+            is_staff=1,
             is_active=1
         )
         return redirect('/')
@@ -69,29 +78,42 @@ def registerView(request):
         
 @login_required(login_url='')
 def home(request):
+    try:
+        users = Friendship.objects.filter(me=request.user.id,is_accepted=True)
+        print('1',len(users))
+    except:
+        context = {
+            "user":request.user,
+            "friends":["Adicione um amigo para utilizar o sistema de chat"]
+        }
+        return(render(request,'messenger/sidebar.html',context))
+    print(request.user.id)
+    try:
+        usuario = AuthUser.objects.get(id=request.user.id)
+        friends = Friendship.objects.all().filter(friend=usuario)
+        print(friends[0]['me'])
+    except:
+        solicitacoes = ["Nenhuma solicitação Pendente"]
     user = {
         "user" : request.user,
-        "friends":[
-            {   
-                "name" : "Lucas Furtado",
-                "id" : "1"
-            }
-        ]
+        "friends": users,
+        "solicitation":friends,
     }
     return render(request,'messenger/sidebar.html',user)
 
 @csrf_exempt
 def findUsers(request):
     requestValue = json.loads(request.body)
-    users = User.objects.all().filter(username__icontains=requestValue['fieldValue'])
+    users = User.objects.filter(username__icontains=requestValue['fieldValue'],id__exact)
     friends = {
         'friends' : users
     }
     return render(request,'messenger/newFriend.html',{'friends' : users})
 
-@login_required(login_url="")
+@csrf_exempt
 def addFriend(request):
-    relation = AddFriend({"me":request.user.id,"friend":request.POST.get("friend_id")})
+    requestValue = json.loads(request.body)
+    relation = AddFriend({"me":request.user.id,"friend":requestValue["friend_id"]}).getValues()
     friendship = friendForm(relation)
     if friendship.is_valid():
         friendship.save()

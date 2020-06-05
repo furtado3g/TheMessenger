@@ -5,12 +5,17 @@ import hashlib
 class newUser:
 
     def __init__(self,data):
-        self.username   = data['email']
-        self.password   = data['password']
-        self.first_name = data['first_name']
-        self.last_name  = data['last_name']
+        if data['first_name']:
+            self.username   = data['email']
+            self.password   = data['password']
+            self.first_name = data['first_name']
+            self.last_name  = data['last_name']
+        else:
+            self.username   = data['email']
+            self.password   = data['password']
 
     def get_values(self):
+        
         return{
             "username" : self.username,
             "email" :self.username,
@@ -25,15 +30,21 @@ class newUser:
     def crypto(self,password):
         salt = 'homesweethole'
         key  = hashlib.sha256(password.encode()).hexdigest()
-        print(key)
         return key
-        
+
+class loginDigest:
+    def crypto(self,password):
+        salt = 'homesweethole'
+        key  = hashlib.sha256(password.encode()).hexdigest()
+        return key        
+
+
 
 class AddFriend:
 
     def __init__(self,data):
-        self.user_id = data.me
-        self.friend_id = data.friend
+        self.user_id = data['me']
+        self.friend_id = data['friend']
     
     def getValues(self):
         return {

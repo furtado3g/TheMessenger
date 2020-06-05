@@ -53,3 +53,24 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+async function addFriend(friend){
+    console.log(friend)
+    const data ={
+        url:"friend/add",
+        options:{
+            method:"post",
+            body:JSON.stringify({
+                friend_id : friend
+            }),
+            headers: new Headers({
+                'Content-Type' : 'application/json'
+            })
+        } 
+    }
+    let response = await makeRequest(data)
+    let parsed = JSON.parse(response)
+    if(response != 404 && parsed != 'Erro ao Adicionar Amigo'){
+        alert("solicitação enviada com sucesso")
+    }
+}

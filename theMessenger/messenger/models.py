@@ -120,9 +120,10 @@ class DjangoSession(models.Model):
 
 
 class Friendship(models.Model):    
-    me = models.ForeignKey(AuthUser,on_delete=models.CASCADE)
-    friend = models.IntegerField()
+    me = models.IntegerField()
+    friend = models.ForeignKey(AuthUser,on_delete=models.CASCADE)
     date_include = models.DateTimeField(default=now())
+    is_accepted = models.BooleanField(default=False)
 
     class Meta:
         managed = True
