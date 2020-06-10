@@ -104,7 +104,7 @@ def home(request):
 @csrf_exempt
 def findUsers(request):
     requestValue = json.loads(request.body)
-    users = User.objects.filter(username__icontains=requestValue['fieldValue'],id__exact)
+    users = User.objects.filter(username__icontains=requestValue['fieldValue'])
     friends = {
         'friends' : users
     }
