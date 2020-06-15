@@ -47,7 +47,7 @@ class AuthUser(models.Model):
     email = models.CharField(max_length=254)
     is_staff = models.BooleanField()
     is_active = models.BooleanField()
-    date_joined = models.DateTimeField(default=now())
+    date_joined = models.DateTimeField(auto_now=True)
     last_name = models.CharField(max_length=150)
 
     class Meta:
@@ -122,9 +122,19 @@ class DjangoSession(models.Model):
 class Friendship(models.Model):    
     me = models.IntegerField()
     friend = models.ForeignKey(AuthUser,on_delete=models.CASCADE)
-    date_include = models.DateTimeField(default=now())
+    date_include = models.DateTimeField(auto_now=True)
     is_accepted = models.BooleanField(default=False)
 
     class Meta:
         managed = True
         db_table = 'Friendship'
+
+class Messages(models.Model):
+    destinatario = models.ForeignKey(AuthUser,on_delete=models.CASCADE,related_name="destinatario")
+    remetente = models.ForeignKey(AuthUser,on_delete=models.CASCADE,related_name="remetente")
+    corpo  = models.CharField(max_length=254)
+    enviada = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Messages'
+        managed = True
