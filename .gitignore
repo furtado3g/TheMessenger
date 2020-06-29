@@ -1,7 +1,6 @@
 ##ignore files from 
 .venv/
 .env
-*.sqlite3
 .vscode/
 __pycache__
 *.pyc
